@@ -1,4 +1,4 @@
-package Math
+package STD
 
 func NOD(a, b int) int {
 	for b != 0 {

@@ -1,42 +1,42 @@
 package Matrix
 
 import (
-	"MatrixGO/Math"
+	"MatrixGO/STD"
 	"fmt"
 )
 
-type Martix [][]Math.Fraction
+type Matrix [][]STD.Fraction
 
-func NewMatrix(rows, columns int) (matrix Martix) {
-	matrix = make([][]Math.Fraction, rows)
+func NewMatrix(rows, columns int) (matrix Matrix) {
+	matrix = make([][]STD.Fraction, rows)
 	for row := 0; row < rows; row++ {
-		matrix[row] = make([]Math.Fraction, columns)
+		matrix[row] = make([]STD.Fraction, columns)
 		for col := 0; col < columns; col++ {
-			matrix[row][col] = Math.NewFracNum(0)
+			matrix[row][col] = STD.NewFracNum(0)
 		}
 	}
 	return
 }
 
-func NewScalarMatrix(size, val int) (matrix Martix) {
+func NewScalarMatrix(size, val int) (matrix Matrix) {
 
 	matrix = NewMatrix(size, size)
 
 	for rc := 0; rc < size; rc++ {
-		matrix[rc][rc] = Math.NewFracNum(val)
+		matrix[rc][rc] = STD.NewFracNum(val)
 	}
 
 	return
 }
 
-func MatrixMulMatrix(a, b Martix) (c Martix) {
+func MatrixMulMatrix(a, b Matrix) (c Matrix) {
 	c = NewMatrix(a.Rows(), b.Columns())
 
 	for row := 0; row < c.Rows(); row++ {
 		for col := 0; col < c.Columns(); col++ {
 			for s := 0; s < a.Columns(); s++ {
-				frac := Math.FracMulFrac(a[row][s], b[s][col])
-				c[row][col] = Math.FracAddFrac(c[row][col], frac).FracCut()
+				frac := STD.FracMulFrac(a[row][s], b[s][col])
+				c[row][col] = STD.FracAddFrac(c[row][col], frac).FracCut()
 			}
 		}
 	}
@@ -44,16 +44,16 @@ func MatrixMulMatrix(a, b Martix) (c Martix) {
 	return
 }
 
-func (matrix Martix) Rows() int {
+func (matrix Matrix) Rows() int {
 	return len(matrix)
 }
 
-func (matrix Martix) Columns() int {
+func (matrix Matrix) Columns() int {
 	return len(matrix[0])
 }
 
-func (matrix Martix) GetRow(row int) (res []Math.Fraction) {
-	res = make([]Math.Fraction, matrix.Columns())
+func (matrix Matrix) GetRow(row int) (res []STD.Fraction) {
+	res = make([]STD.Fraction, matrix.Columns())
 
 	for col := 0; col < matrix.Columns(); col++ {
 		res[col] = matrix[row][col]
@@ -62,8 +62,8 @@ func (matrix Martix) GetRow(row int) (res []Math.Fraction) {
 	return
 }
 
-func (matrix Martix) GetColumn(col int) (res []Math.Fraction) {
-	res = make([]Math.Fraction, matrix.Rows())
+func (matrix Matrix) GetColumn(col int) (res []STD.Fraction) {
+	res = make([]STD.Fraction, matrix.Rows())
 
 	for row := 0; row < matrix.Rows(); row++ {
 		res[row] = matrix[row][col]
@@ -72,7 +72,7 @@ func (matrix Martix) GetColumn(col int) (res []Math.Fraction) {
 	return
 }
 
-func (matrix Martix) Transform() (res Martix) {
+func (matrix Matrix) Transform() (res Matrix) {
 	res = NewMatrix(matrix.Columns(), matrix.Rows())
 
 	for row := 0; row < res.Rows(); row++ {
@@ -84,7 +84,7 @@ func (matrix Martix) Transform() (res Martix) {
 	return
 }
 
-func (matrix Martix) ToString() (res string) {
+func (matrix Matrix) ToString() (res string) {
 	for _, row := range matrix {
 		for _, col := range row {
 			res += col.ToString() + "\t"
@@ -95,13 +95,13 @@ func (matrix Martix) ToString() (res string) {
 	return
 }
 
-func (matrix Martix) Print() Martix {
+func (matrix Matrix) Print() Matrix {
 	fmt.Print("\n", matrix.ToString())
 
 	return matrix
 }
 
-func (matrix Martix) Println() Martix {
+func (matrix Matrix) Println() Matrix {
 	fmt.Print("\n", matrix.ToString(), "\n")
 
 	return matrix

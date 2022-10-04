@@ -1,6 +1,6 @@
 package Matrix
 
-import "MatrixGO/Math"
+import "MatrixGO/STD"
 
 func (matrix Matrix) SwapRows(row1, row2 int) Matrix {
 
@@ -20,37 +20,37 @@ func (matrix Matrix) SwapColumns(colum1, colum2 int) Matrix {
 	return matrix
 }
 
-func (matrix Matrix) RowMulFrac(row int, frac Math.Fraction) Matrix {
+func (matrix Matrix) RowMulFrac(row int, frac STD.Fraction) Matrix {
 
 	for colum := 0; colum < matrix.Columns(); colum++ {
-		matrix[row][colum] = Math.FracMulFrac(matrix[row][colum], frac).FracCut()
+		matrix[row][colum] = STD.FracMulFrac(matrix[row][colum], frac).FracCut()
 	}
 
 	return matrix
 }
 
-func (matrix Matrix) ColumMulFrac(colum int, frac Math.Fraction) Matrix {
+func (matrix Matrix) ColumMulFrac(colum int, frac STD.Fraction) Matrix {
 
 	for row := 0; row < matrix.Rows(); row++ {
-		matrix[row][colum] = Math.FracMulFrac(matrix[row][colum], frac).FracCut()
+		matrix[row][colum] = STD.FracMulFrac(matrix[row][colum], frac).FracCut()
 	}
 
 	return matrix
 }
 
-func (matrix Matrix) RowAddRowMulFrac(row1, row2 int, fracForRow2 Math.Fraction) Matrix {
+func (matrix Matrix) RowAddRowMulFrac(row1, row2 int, fracForRow2 STD.Fraction) Matrix {
 
 	for colum := 0; colum < matrix.Columns(); colum++ {
-		matrix[row1][colum] = Math.FracAddFrac(matrix[row1][colum], Math.FracMulFrac(matrix[row2][colum], fracForRow2)).FracCut()
+		matrix[row1][colum] = STD.FracAddFrac(matrix[row1][colum], STD.FracMulFrac(matrix[row2][colum], fracForRow2)).FracCut()
 	}
 
 	return matrix
 }
 
-func (matrix Matrix) ColumAddColumMulFrac(colum1, colum2 int, fracForColum2 Math.Fraction) Matrix {
+func (matrix Matrix) ColumAddColumMulFrac(colum1, colum2 int, fracForColum2 STD.Fraction) Matrix {
 
 	for row := 0; row < matrix.Rows(); row++ {
-		matrix[row][colum1] = Math.FracAddFrac(matrix[row][colum1], Math.FracMulFrac(matrix[row][colum2], fracForColum2)).FracCut()
+		matrix[row][colum1] = STD.FracAddFrac(matrix[row][colum1], STD.FracMulFrac(matrix[row][colum2], fracForColum2)).FracCut()
 	}
 
 	return matrix

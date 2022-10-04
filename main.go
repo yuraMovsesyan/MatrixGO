@@ -2,11 +2,18 @@ package main
 
 import (
 	"MatrixGO/Matrix"
+	"MatrixGO/STD"
+	"fmt"
 )
 
 func main() {
-	a := Matrix.NewScalarMatrix(3, 2)
-	b := Matrix.NewScalarMatrix(3, 3)
+	a := Matrix.Matrix{
+		{STD.NewFracNum(4)},
+		{STD.NewFracNum(-1)},
+		{STD.NewFracNum(-2)},
+	}
 
-	Matrix.MatrixMulMatrix(a, b).Println()
+	id, _ := STD.MaxFracArray(a.GetColumn(0))
+
+	fmt.Println(id)
 }
